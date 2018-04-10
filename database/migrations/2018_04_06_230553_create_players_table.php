@@ -19,7 +19,8 @@ class CreatePlayersTable extends Migration
             $table->string('level', 10);
             $table->integer('score');
             $table->boolean('suspected');
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
         

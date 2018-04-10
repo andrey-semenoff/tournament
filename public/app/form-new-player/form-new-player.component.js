@@ -43,7 +43,7 @@ function FormNewPlayerController($rootScope, $http) {
 
 		$http.post('/api/v1/player' + '?' + query, player)
 			.then(function(responce) {
-				console.log(responce);
+				// console.log(responce);
 
 				$rootScope.players_total = responce.headers('x-total');
 				$rootScope.players = responce.data;

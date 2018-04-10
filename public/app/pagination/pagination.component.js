@@ -17,7 +17,7 @@ function PaginationController($http, $rootScope) {
 	$rootScope.$on('dataLoaded', function(e, params) {
 		var total = $rootScope.players_total,
 				pages = Math.ceil(total/params.n);
-console.log(params, pages);
+// console.log(params, pages);
 		vm.start = parseInt(params.start);
 
 		if( pages >= 2 ) {
