@@ -1,0 +1,105 @@
+<div class="form-row mx-0 justify-content-end">
+	<label class="form-group col-sm-4 col-md-3 mb-2 d-flex align-items-center">
+		<span class="mx-auto w-100 text-right pr-2">Level:</span> 
+		<select 
+			class="form-control" 
+			ng-model="$root.levelFilter"
+			ng-change="$ctrl.changeLevelFilter()">
+			<option value="">All</option>
+			<option value="rookie">rookie</option>
+			<option value="amateur">amateur</option>
+			<option value="pro">pro</option>
+		</select>
+	</label>
+
+	<label class="form-group col-sm-4 col-md-3 mb-2 d-flex align-items-center">
+		<span class="mx-auto w-100 text-right pr-2">Per page:</span> 
+		<select 
+			class="form-control" 
+			ng-model="$root.n"
+			ng-change="$ctrl.changePagingPlayers()">
+			<option value="5">5 players</option>
+			<option value="10">10 players</option>
+			<option value="15">15 players</option>
+		</select>
+	</label>
+</div>
+
+<table class="table table-striped text-center" id="players-table"
+	ng-show="$root.players.length" ng-class="!$root.players.length ? 'blured' : ''">
+	<thead>
+		<tr class="table-dark font-weight-bold">
+			<th class="p-0 pb-2">
+				<div 
+					class="table-header-sort p-2" 
+					ng-click="$ctrl.setSortCol($event, 'id')">ID <i class="fas fa-chevron-down"></i></div>
+				<input 
+					type="text" 
+					class="table-header-input"
+					ng-model="$ctrl.filter_id"
+					ng-change="$ctrl.filterCol('id')">
+			</th>
+			<th class="p-0 pb-2">
+				<div 
+					class="table-header-sort p-2" 
+					ng-click="$ctrl.setSortCol($event, 'name')">NAME <i class="fas fa-chevron-down"></i></div>
+				<input 
+					type="text" 
+					class="table-header-input"
+					ng-model="$ctrl.filter_name"
+					ng-change="$ctrl.filterCol('id')">
+			</th>
+			<th class="p-0 pb-2">
+				<div 
+					class="table-header-sort p-2" 
+					ng-click="$ctrl.setSortCol($event, 'level')">LEVEL <i class="fas fa-chevron-down"></i></div>
+				<input 
+					type="text" 
+					class="table-header-input"
+					ng-model="$ctrl.filter_level"
+					ng-change="$ctrl.filterCol('id')">
+			</th>
+			<th class="p-0 pb-2">
+				<div 
+					class="table-header-sort p-2" 
+					ng-click="$ctrl.setSortCol($event, 'score')">SCORE <i class="fas fa-chevron-down"></i></div>
+				<input 
+					type="text" 
+					class="table-header-input"
+					ng-model="$ctrl.filter_score"
+					ng-change="$ctrl.filterCol('id')">
+			</th>
+			<!-- <th>
+				<div 
+					class="table-header-sort" 
+					ng-click="$ctrl.setSortCol('id')">SUSPECTED</div>
+				<input 
+					type="text" 
+					class="table-header-input"
+					ng-model="$ctrl.filter_phrase"
+					ng-change="$ctrl.filterCol('id')">
+			</th> -->
+		</tr>
+	</thead>
+	<tbody>
+		<tr 
+			ng-repeat="player in $root.players | orderBy: $ctrl.sort_col | filter: $ctrl.filterByColValues"  ng-class="player.suspected ? 'bg-danger text-white' : ''"
+			title="{{player.suspected ? 'Player is suspected!' : ''}}">
+			<td>{{ player.id }}</td>
+			<td>{{ player.name | uppercase }}</td>
+			<td>{{ player.level }}</td>
+			<td>{{ player.score }}</td>
+			<!-- <td>{{ player.suspected }}</td> -->
+		</tr>
+	</tbody>
+	<tfoot class="text-uppercase font-weight-bold" style="font-size: 20px">
+		<tr>
+			<td class="text-right">Total:</td>
+			<td colspan="3" class="text-left">{{ $root.players_total }} player{{ $root.players_total > 1 ? 's' : ''}}</td>
+		</tr>
+	</tfoot>
+</table>
+<p
+	class="text-center text-danger"
+	ng-hide="$root.players.length">No data find! Try to change search text!</p>
+<div ng-bind-html="$rootScope.loading"></div>
