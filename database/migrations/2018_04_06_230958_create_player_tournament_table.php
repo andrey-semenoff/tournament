@@ -17,7 +17,8 @@ class CreatePlayerTournamentTable extends Migration
             $table->increments('id');
             $table->integer('player_id');
             $table->integer('tournament_id');
-            $table->timestamps()->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 
