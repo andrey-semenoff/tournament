@@ -6,4 +6,5 @@ Show the results of tournament
 ```
 clone https://github.com/andrey-semenoff/tournament.git
 composer install
+php artisan db:seed
 ```
