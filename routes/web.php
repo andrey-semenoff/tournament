@@ -14,12 +14,3 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::prefix('/api')->group(function() {
-	Route::prefix('/v1')->group(function() {
-		Route::get    ('/players', 'PlayerController@index');
-		Route::post 	('/player', 'PlayerController@store');
-		Route::put    ('/player', 'PlayerController@update');
-		Route::delete ('/player', 'PlayerController@destroy');
-	});
-});
